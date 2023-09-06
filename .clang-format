@@ -1,0 +1,35 @@
+# Copyright (c) 2023 Mikhail Svetkin
+# SPDX-License-Identifier: MIT
+---
+Language:        Cpp
+BasedOnStyle:  Google
+
+AlignConsecutiveBitFields: Consecutive
+
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+DerivePointerAlignment: true
+
+IncludeBlocks:   Regroup
+IncludeCategories:
+  - Regex:           '^"(cxx)/'
+    Priority:        1
+  - Regex:           '^".*\.(h|hpp)"'
+    Priority:        2
+  - Regex:           '^<fmt.*\.h>'
+    Priority:        3
+  - Regex:           '^<catch2.*\.hpp>'
+    Priority:        4
+  - Regex:           '^<.*\.h>'
+    Priority:        6
+  - Regex:           '^<.*>'
+    Priority:        5
+
+PackConstructorInitializers: Never
+PointerAlignment: Right
+
+ShortNamespaceLines: 0

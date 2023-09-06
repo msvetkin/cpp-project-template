@@ -1,0 +1,42 @@
+{
+  "version": 6,
+  "include": [
+    "../common/ninja.json",
+    "../common/vcpkg.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "linux",
+      "inherits": [
+        "ninja-multi-config",
+        "vcpkg"
+      ],
+      "displayName": "linux only configuration",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "inherits": "ninja-multi-config",
+      "configurePreset": "linux",
+      "hidden": true
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux",
+      "inherits": "ninja-multi-config",
+      "configurePreset": "linux",
+      "hidden": true
+    }
+  ]
+}

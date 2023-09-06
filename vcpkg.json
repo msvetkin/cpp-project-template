@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "cxx",
+  "version-string": "0.0.1",
+  "features": {
+    "tests": {
+      "description": "Build tests",
+      "dependencies": [
+        "catch2"
+      ]
+    }
+  },
+  "dependencies": [
+    "fmt",
+    "range-v3",
+    "ms-gsl"
+  ]
+}

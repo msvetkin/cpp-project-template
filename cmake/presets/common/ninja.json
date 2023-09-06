@@ -1,0 +1,66 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "ninja",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_STANDARD_REQUIRED": true
+      }
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "inherits": [
+        "ninja"
+      ],
+      "generator": "Ninja Multi-Config"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja",
+      "hidden": true
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "configurePreset": "ninja-multi-config",
+      "configuration": "Debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "common",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "ninja",
+      "hidden": true,
+      "inherits": [
+        "common"
+      ],
+      "configurePreset": "ninja"
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "inherits": [
+        "common"
+      ],
+      "configurePreset": "ninja-multi-config",
+      "configuration": "Debug"
+    }
+  ]
+}

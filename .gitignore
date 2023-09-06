@@ -1,0 +1,12 @@
+# cmake
+build
+CMakeUserPresets.json
+
+#clangd
+.cache/clangd
+compile_commands.json
+
+# other
+_build
+tmp
+Testing
