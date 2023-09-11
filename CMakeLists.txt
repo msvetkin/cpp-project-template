@@ -3,11 +3,7 @@
 
 cmake_minimum_required(VERSION 3.25)
 
-list(APPEND VCPKG_MANIFEST_FEATURES "tests")
-
-project(cxx-dev LANGUAGES CXX)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+project(cpp-project-template-dev LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 

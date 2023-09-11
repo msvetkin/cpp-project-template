@@ -3,13 +3,11 @@
 
 cmake_minimum_required(VERSION 3.25)
 
-project(cxx-tests LANGUAGES CXX)
-
-message(STATUS "PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
+project(cpp-project-template-tests LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-include(add_cxx_test)
+include(add_cpp_project_template_test)
 
 add_subdirectory(core)
 

@@ -1,18 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
-  "name": "cxx",
+  "name": "cpp-project-template",
   "version-string": "0.0.1",
-  "features": {
-    "tests": {
-      "description": "Build tests",
-      "dependencies": [
-        "catch2"
-      ]
-    }
-  },
   "dependencies": [
     "fmt",
     "range-v3",
-    "ms-gsl"
+    "ms-gsl",
+    "catch2"
   ]
 }
