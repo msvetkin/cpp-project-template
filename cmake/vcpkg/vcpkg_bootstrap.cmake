@@ -123,9 +123,9 @@ endfunction()
 # find root
 function(_vcpkg_find_root vcpkg_root)
   if(WIN32)
-    set(root C:/Users/$ENV{USERNAME}/AppData/Local/vcpkg/repos/cxx/cache)
+    set(root $ENV{LOCALAPPDATA}/vcpkg/repos/cpp-project-template/cache)
   else()
-    set(root $ENV{HOME}/.cache/vcpkg/repos/cxx)
+    set(root $ENV{HOME}/.cache/vcpkg/repos/cpp-project-template)
   endif()
 
   set(${vcpkg_root}

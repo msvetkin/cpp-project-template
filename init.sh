@@ -59,3 +59,5 @@ git ls-files | tac | grep -v "^\." | grep -v "init.sh" | while read -r filename;
     git mv "$filename" "$new_filename"
   fi
 done
+
+git rm init.sh
