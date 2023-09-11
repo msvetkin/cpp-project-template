@@ -1,12 +1,15 @@
 # cmake
 build
 CMakeUserPresets.json
+Testing
 
 #clangd
 .cache/clangd
 compile_commands.json
 
+# CLion
+.idea
+
 # other
 _build
 tmp
-Testing

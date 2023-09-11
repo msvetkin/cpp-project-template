@@ -1,0 +1,34 @@
+{
+  "version": 6,
+  "include": [
+    "base.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "inherits": "base",
+      "configurePreset": "linux-base"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "inherits": "base",
+      "configurePreset": "linux-base"
+    }
+  ]
+}

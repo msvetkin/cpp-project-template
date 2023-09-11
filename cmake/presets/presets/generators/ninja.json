@@ -1,0 +1,40 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "ninja",
+      "hidden": true,
+      "generator": "Ninja"
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "generator": "Ninja Multi-Config"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja",
+      "hidden": true
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "configurePreset": "ninja-multi-config",
+      "configuration": "Debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "ninja",
+      "hidden": true,
+      "configurePreset": "ninja"
+    },
+    {
+      "name": "ninja-multi-config",
+      "hidden": true,
+      "configurePreset": "ninja-multi-config",
+      "configuration": "Debug"
+    }
+  ]
+}

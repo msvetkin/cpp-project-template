@@ -3,7 +3,6 @@
   "configurePresets": [
     {
       "name": "vcpkg",
-      "displayName": "vcpkg base options",
       "hidden": true,
       "toolchainFile": "${sourceDir}/cmake/vcpkg/vcpkg.toolchain.cmake",
       "cacheVariables": {
