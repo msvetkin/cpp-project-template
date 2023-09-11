@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Mikhail Svetkin.
+# SPDX-FileCopyrightText: 2023 Mikhail Svetkin <mikhail.svetkin@gmail.com>
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.25)
@@ -17,6 +17,4 @@ find_package(fmt CONFIG REQUIRED)
 find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(range-v3 CONFIG REQUIRED)
 
-message(STATUS "before core")
 add_subdirectory(core)
-message(STATUS "after core")

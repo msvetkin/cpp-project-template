@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Mikhail Svetkin.
+# SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
 cmake_minimum_required(VERSION 3.25)
