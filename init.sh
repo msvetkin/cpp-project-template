@@ -29,7 +29,7 @@ echo "project name:    ${project_name}"
 echo "module include:  #include \"${project_include}/${module_name}/${module_header}.hpp\""
 echo "cmake functions: add_${project_function}_module/test"
 
-read -p "Review configurationa. Confirm? (y/n): " choice
+read -p "Review configurations. Confirm? (y/n): " choice
 case "$choice" in
   [yY]*)
       ;;
