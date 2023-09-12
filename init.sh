@@ -1,7 +1,7 @@
+#!/usr/bin/env bash
 # SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
-#!/usr/bin/env bash
 
 # Check if the script is invoked from within a Git repository
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
