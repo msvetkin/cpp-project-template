@@ -61,3 +61,8 @@ git ls-files | tac | grep -v "^\." | grep -v "init.sh" | while read -r filename;
 done
 
 git rm init.sh
+if [ "module_name" != "core" ]; then
+    rm -rf test/core
+    rm -rf src/core
+fi
+
