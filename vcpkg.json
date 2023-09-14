@@ -7,5 +7,6 @@
     "range-v3",
     "ms-gsl",
     "catch2"
-  ]
+  ],
+  "builtin-baseline": "@VCPKG_BUILTIN_BASELINE@"
 }
