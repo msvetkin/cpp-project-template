@@ -1,0 +1,31 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "clang",
+      "hidden": true,
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      }
+    },
+    {
+      "name": "x64-clang",
+      "hidden": true,
+      "inherits": "clang",
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      }
+    },
+    {
+      "name": "x86-clang",
+      "hidden": true,
+      "inherits": "clang",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-m32",
+        "CMAKE_CXX_FLAGS": "-m32"
+      }
+    }
+  ]
+}

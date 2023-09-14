@@ -1,13 +1,9 @@
 {
   "version": 6,
-  "include": [
-    "base.json"
-  ],
   "configurePresets": [
     {
-      "name": "linux-base",
+      "name": "linux",
       "hidden": true,
-      "inherits": "base",
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
@@ -17,18 +13,16 @@
   ],
   "buildPresets": [
     {
-      "name": "linux-base",
+      "name": "linux",
       "hidden": true,
-      "inherits": "base",
-      "configurePreset": "linux-base"
+      "configurePreset": "linux"
     }
   ],
   "testPresets": [
     {
-      "name": "linux-base",
+      "name": "linux",
       "hidden": true,
-      "inherits": "base",
-      "configurePreset": "linux-base"
+      "configurePreset": "linux"
     }
   ]
 }

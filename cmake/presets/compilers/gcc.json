@@ -1,0 +1,31 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "gcc",
+      "hidden": true,
+      "environment": {
+        "CC": "gcc",
+        "CXX": "g++"
+      }
+    },
+    {
+      "name": "x64-gcc",
+      "hidden": true,
+      "inherits": "gcc",
+      "environment": {
+        "CC": "gcc",
+        "CXX": "g++"
+      }
+    },
+    {
+      "name": "x86-gcc",
+      "hidden": true,
+      "inherits": "gcc",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-m32",
+        "CMAKE_CXX_FLAGS": "-m32"
+      }
+    }
+  ]
+}

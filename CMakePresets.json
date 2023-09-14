@@ -6,6 +6,9 @@
     "patch": 0
   },
   "include": [
-    "cmake/presets/linux.json"
+    "cmake/presets/x64-linux-gcc.json",
+    "cmake/presets/x86-linux-gcc.json",
+    "cmake/presets/x64-linux-clang.json",
+    "cmake/presets/x86-linux-clang.json"
   ]
 }

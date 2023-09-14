@@ -1,0 +1,123 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/linux.json",
+    "compilers/clang.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x86-linux-clang-static",
+      "inherits": [
+        "base",
+        "linux",
+        "x86-clang"
+      ],
+      "displayName": "linux clang static libs",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x86-linux"
+      }
+    },
+    {
+      "name": "x86-linux-clang-dynamic",
+      "inherits": "x86-linux-clang-static",
+      "displayName": "linux clang dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "VCPKG_TARGET_TRIPLET": "x86-linux-dynamic"
+      }
+    },
+    {
+      "name": "x86-linux-clang",
+      "inherits": "x86-linux-clang-dynamic",
+      "displayName": "alias to x86-linux-clang-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x86-linux-clang-static",
+      "inherits": "base",
+      "configurePreset": "x86-linux-clang-static"
+    },
+    {
+      "name": "x86-linux-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "x86-linux-clang-dynamic"
+    },
+    {
+      "name": "x86-linux-clang",
+      "inherits": "x86-linux-clang-dynamic",
+      "configurePreset": "x86-linux-clang"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x86-linux-clang-static",
+      "inherits": "base",
+      "configurePreset": "x86-linux-clang-static"
+    },
+    {
+      "name": "x86-linux-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "x86-linux-clang-dynamic"
+    },
+    {
+      "name": "x86-linux-clang",
+      "inherits": "x86-linux-clang-dynamic",
+      "configurePreset": "x86-linux-clang"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x86-linux-clang-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-clang-static"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-clang-static"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-clang-static"
+        }
+      ]
+    },
+    {
+      "name": "x86-linux-clang-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-clang-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-clang-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-clang-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "x86-linux-clang",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-clang"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-clang"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-clang"
+        }
+      ]
+    }
+  ]
+}

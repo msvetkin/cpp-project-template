@@ -1,0 +1,123 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/linux.json",
+    "compilers/gcc.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x86-linux-gcc-static",
+      "inherits": [
+        "base",
+        "linux",
+        "x86-gcc"
+      ],
+      "displayName": "linux gcc static libs",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x86-linux"
+      }
+    },
+    {
+      "name": "x86-linux-gcc-dynamic",
+      "inherits": "x86-linux-gcc-static",
+      "displayName": "linux gcc dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "VCPKG_TARGET_TRIPLET": "x86-linux-dynamic"
+      }
+    },
+    {
+      "name": "x86-linux-gcc",
+      "inherits": "x86-linux-gcc-dynamic",
+      "displayName": "alias to x86-linux-gcc-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x86-linux-gcc-static",
+      "inherits": "base",
+      "configurePreset": "x86-linux-gcc-static"
+    },
+    {
+      "name": "x86-linux-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x86-linux-gcc-dynamic"
+    },
+    {
+      "name": "x86-linux-gcc",
+      "inherits": "x86-linux-gcc-dynamic",
+      "configurePreset": "x86-linux-gcc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x86-linux-gcc-static",
+      "inherits": "base",
+      "configurePreset": "x86-linux-gcc-static"
+    },
+    {
+      "name": "x86-linux-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x86-linux-gcc-dynamic"
+    },
+    {
+      "name": "x86-linux-gcc",
+      "inherits": "x86-linux-gcc-dynamic",
+      "configurePreset": "x86-linux-gcc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x86-linux-gcc-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-gcc-static"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-gcc-static"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-gcc-static"
+        }
+      ]
+    },
+    {
+      "name": "x86-linux-gcc-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-gcc-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-gcc-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-gcc-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "x86-linux-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x86-linux-gcc"
+        },
+        {
+          "type": "build",
+          "name": "x86-linux-gcc"
+        },
+        {
+          "type": "test",
+          "name": "x86-linux-gcc"
+        }
+      ]
+    }
+  ]
+}
