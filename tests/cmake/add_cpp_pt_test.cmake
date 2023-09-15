@@ -9,7 +9,7 @@ include(CTest)
 include(Catch)
 
 # sets all nessary default things
-function(add_cpp_project_template_test test_name)
+function(add_@cpp_pt_cmake@_test test_name)
   cmake_path(GET CMAKE_CURRENT_LIST_DIR FILENAME module_name)
 
   set(test_file "${test_name}_test.cpp")
@@ -17,8 +17,8 @@ function(add_cpp_project_template_test test_name)
 
   add_executable(${test_target} "${test_file}")
   target_link_libraries(
-    ${test_target} PRIVATE cpp-project-template::${module_name} Catch2::Catch2WithMain
+    ${test_target} PRIVATE @cpp_pt_name@::${module_name} Catch2::Catch2WithMain
   )
 
-catch_discover_tests(${test_target} TEST_PREFIX "${test_target}:" ${ARGN})
+  catch_discover_tests(${test_target} TEST_PREFIX "${test_target}:" ${ARGN})
 endfunction()

@@ -13,24 +13,12 @@ endif()
 
 unset(IN_TRY_COMPILE)
 
-if (NOT DEFINED VCPKG_BUILTIN_BASELINE)
-  message(FATAL_ERROR "Missing mandatory VCPKG_BUILTIN_BASELINE")
-endif()
-
-if (NOT DEFINED VCPKG_BOOTSTRAP_CHECKOUT)
-  set(VCPKG_BOOTSTRAP_CHECKOUT "${VCPKG_BUILTIN_BASELINE}" CACHE INTERNAL "")
-endif()
-
-if (EXISTS "${CMAKE_SOURCE_DIR}/vcpkg.json")
-  configure_file(${CMAKE_SOURCE_DIR}/vcpkg.json "." @ONLY)
-  set(VCPKG_MANIFEST_DIR ${CMAKE_BINARY_DIR} CACHE INTERNAL "")
-endif()
-
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_bootstrap.cmake)
 
 vcpkg_bootstrap(
-  https://github.com/microsoft/vcpkg.git
-  "${VCPKG_BOOTSTRAP_CHECKOUT}"
+  CACHE_DIR_NAME @cpp_pt_name@
+  REPO https://github.com/microsoft/vcpkg.git
+  REF 9edb1b8e590cc086563301d735cae4b6e732d2d2 # release 2023.08.09
 )
 
 include($CACHE{VCPKG_TOOLCHAIN_FILE})
