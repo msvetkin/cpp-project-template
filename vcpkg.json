@@ -1,12 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
-  "name": "cpp-project-template",
+  "name": "@cpp_pt_name@",
   "version-string": "0.0.1",
   "dependencies": [
     "fmt",
     "range-v3",
     "ms-gsl",
     "catch2"
-  ],
-  "builtin-baseline": "@VCPKG_BUILTIN_BASELINE@"
+  ]
 }

@@ -17,11 +17,11 @@ function(_vcpkg_stash vcpkg_root)
 endfunction()
 
 # checkout to a specific baseline
-function(_vcpkg_checkout vcpkg_root vcpkg_commit)
-  message(STATUS "vcpkg checkout to ${vcpkg_commit}")
+function(_vcpkg_checkout vcpkg_root vcpkg_ref)
+  message(STATUS "vcpkg checkout to ${vcpkg_ref}")
 
   execute_process(
-    COMMAND ${GIT_EXECUTABLE} checkout ${vcpkg_commit}
+    COMMAND ${GIT_EXECUTABLE} checkout ${vcpkg_ref}
     WORKING_DIRECTORY ${vcpkg_root}
     RESULT_VARIABLE result
   )
@@ -29,15 +29,13 @@ function(_vcpkg_checkout vcpkg_root vcpkg_commit)
   if(NOT result EQUAL "0")
     message(
       FATAL_ERROR
-        "${GIT_EXECUTABLE} checkout ${vcpkg_commit} failed with ${result}"
+        "${GIT_EXECUTABLE} checkout ${vcpkg_ref} failed with ${result}"
     )
   endif()
 endfunction()
 
 # clone
-function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_commit)
-  message(STATUS "Cloning vckpg to ${vcpkg_root}")
-
+function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
   execute_process(
     COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -48,7 +46,8 @@ function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_commit)
     message(FATAL_ERROR "failed to clone ${vcpkg_repo} to ${vcpkg_root}")
   endif()
 
-  _vcpkg_checkout(${vcpkg_root} ${vcpkg_commit})
+  file(LOCK "${vcpkg_root}" DIRECTORY)
+  _vcpkg_checkout(${vcpkg_root} ${vcpkg_ref})
 endfunction()
 
 # boostrap
@@ -73,7 +72,9 @@ function(_vcpkg_bootstrap vcpkg_root)
 endfunction()
 
 # upgrade
-function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_commit)
+function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
+  file(LOCK "${vcpkg_root}" DIRECTORY)
+
   execute_process(
     COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
     WORKING_DIRECTORY ${vcpkg_root}
@@ -87,13 +88,13 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_commit)
     )
   endif()
 
-  if("${current_git_hash}" STREQUAL "${vcpkg_commit}")
+  if("${current_git_hash}" STREQUAL "${vcpkg_ref}")
     return()
   endif()
 
   message(STATUS "Upgrade vcpkg")
   message(STATUS "vcpkg current commit: ${current_git_hash}")
-  message(STATUS "vcpkg release:        ${vcpkg_commit}")
+  message(STATUS "vcpkg release:        ${vcpkg_ref}")
 
   execute_process(
     COMMAND ${GIT_EXECUTABLE} remote set-url origin ${vcpkg_repo}
@@ -116,65 +117,82 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_commit)
   endif()
 
   _vcpkg_stash(${vcpkg_root})
-  _vcpkg_checkout(${vcpkg_root} ${vcpkg_commit})
+  _vcpkg_checkout(${vcpkg_root} ${vcpkg_ref})
   _vcpkg_bootstrap(${vcpkg_root})
 endfunction()
 
 # find root
-function(_vcpkg_find_root vcpkg_root)
+function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
   if(WIN32)
-    set(root $ENV{LOCALAPPDATA}/vcpkg/repos/cpp-project-template/cache)
+    set(root "$ENV{LOCALAPPDATA}/vcpkg/repos/${cache_dir_name}/cache")
   else()
-    set(root $ENV{HOME}/.cache/vcpkg/repos/cpp-project-template)
+    set(root "$ENV{HOME}/.cache/vcpkg/repos/${cache_dir_name}")
   endif()
 
-  set(${vcpkg_root}
+  set(${out_vcpkg_root}
       ${root}
       PARENT_SCOPE
   )
 endfunction()
 
+# set vcpkg_root/executable/toolchain_file cache variables
+function(_vcpkg_set_cache_variables vcpkg_root)
+  set(VCPKG_ROOT
+      "${vcpkg_root}"
+      CACHE INTERNAL "vcpkg root"
+  )
+
+  if(WIN32)
+    set(VCPKG_EXECUTABLE
+        "${vcpkg_root}/vcpkg.exe"
+        CACHE INTERNAL "vcpkg executable"
+    )
+  else()
+    set(VCPKG_EXECUTABLE
+        "${vcpkg_root}/vcpkg"
+        CACHE INTERNAL "vcpkg executable"
+    )
+  endif()
+
+  set(VCPKG_TOOLCHAIN_FILE
+      "${vcpkg_root}/scripts/buildsystems/vcpkg.cmake"
+      CACHE INTERNAL "vcpkg toolchain file"
+  )
+endfunction()
+
 # bootstrap
-function(vcpkg_bootstrap vcpkg_repo vcpkg_commit)
+function(vcpkg_bootstrap)
+  cmake_parse_arguments(
+    PARSE_ARGV 0 "arg"
+    ""
+    "CACHE_DIR_NAME;REPO;REF"
+    ""
+  )
+
+  if (DEFINED arg_UNPARSED_ARGUMENTS)
+    message(FATAL_ERROR "internal error: ${CMAKE_CURRENT_FUNCTION} passed extra args: ${arg_UNPARSED_ARGUMENTS}")
+  endif()
+
   find_package(Git QUIET REQUIRED)
 
   if(DEFINED CACHE{VCPKG_ROOT})
     set(vcpkg_root $CACHE{VCPKG_ROOT})
   else()
-    _vcpkg_find_root(vcpkg_root)
+    _vcpkg_find_root("${arg_CACHE_DIR_NAME}" vcpkg_root)
   endif()
 
   if(NOT EXISTS ${vcpkg_root})
-    _vcpkg_clone(${vcpkg_root} ${vcpkg_repo} ${vcpkg_commit})
+    message(STATUS "Setup vcpkg")
+    _vcpkg_clone(${vcpkg_root} ${arg_REPO} ${arg_REF})
     _vcpkg_bootstrap(${vcpkg_root})
   else()
     message(STATUS "Found vcpkg in: ${vcpkg_root}")
-    _vcpkg_upgrade(${vcpkg_root} ${vcpkg_repo} ${vcpkg_commit})
+    _vcpkg_upgrade(${vcpkg_root} ${arg_REPO} ${arg_REF})
   endif()
 
   if(DEFINED CACHE{VCPKG_TOOLCHAIN_FILE})
     return()
   endif()
 
-  set(VCPKG_ROOT
-      "${vcpkg_root}"
-      CACHE PATH "vcpkg root"
-  )
-
-  if(WIN32)
-    set(VCPKG_EXECUTABLE
-        "${vcpkg_root}/vcpkg.exe"
-        CACHE PATH "vcpkg executable"
-    )
-  else()
-    set(VCPKG_EXECUTABLE
-        "${vcpkg_root}/vcpkg"
-        CACHE PATH "vcpkg executable"
-    )
-  endif()
-
-  set(VCPKG_TOOLCHAIN_FILE
-      "${vcpkg_root}/scripts/buildsystems/vcpkg.cmake"
-      CACHE PATH "vcpkg toolchain file"
-  )
+  _vcpkg_set_cache_variables("${vcpkg_root}")
 endfunction()

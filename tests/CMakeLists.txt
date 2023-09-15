@@ -1,15 +1,15 @@
 # SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
-
+@CPP_PT_HAS_NOT_BEEN_INIT_PLEASE_READ_README@
 cmake_minimum_required(VERSION 3.25)
 
-project(cpp-project-template-tests LANGUAGES CXX)
+project(@cpp_pt_name@-tests LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-include(add_cpp_project_template_test)
+include(add_@cpp_pt_cmake@_test)
 
-add_subdirectory(core)
+add_subdirectory(@cpp_pt_module@)
 
 add_test(
   NAME cmake-install

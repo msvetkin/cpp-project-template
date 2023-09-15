@@ -7,8 +7,7 @@
       "toolchainFile": "${sourceDir}/cmake/vcpkg/vcpkg.toolchain.cmake",
       "cacheVariables": {
         "VCPKG_INSTALL_OPTIONS": "--no-print-usage",
-        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/vcpkg/triplets",
-        "VCPKG_BUILTIN_BASELINE": "9edb1b8e590cc086563301d735cae4b6e732d2d2"
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/vcpkg/triplets"
       }
     }
   ]
