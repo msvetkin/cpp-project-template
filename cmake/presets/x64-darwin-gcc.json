@@ -1,0 +1,123 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/darwin.json",
+    "compilers/gcc.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-darwin-gcc-static",
+      "inherits": [
+        "base",
+        "darwin",
+        "x64-gcc"
+      ],
+      "displayName": "x64 darwin gcc static libs",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-darwin"
+      }
+    },
+    {
+      "name": "x64-darwin-gcc-dynamic",
+      "inherits": "x64-darwin-gcc-static",
+      "displayName": "x64 darwin gcc dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "VCPKG_TARGET_TRIPLET": "x64-darwin-dynamic"
+      }
+    },
+    {
+      "name": "x64-darwin-gcc",
+      "inherits": "x64-darwin-gcc-dynamic",
+      "displayName": "alias to x64-darwin-gcc-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-darwin-gcc-static",
+      "inherits": "base",
+      "configurePreset": "x64-darwin-gcc-static"
+    },
+    {
+      "name": "x64-darwin-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-darwin-gcc-dynamic"
+    },
+    {
+      "name": "x64-darwin-gcc",
+      "inherits": "x64-darwin-gcc-dynamic",
+      "configurePreset": "x64-darwin-gcc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-darwin-gcc-static",
+      "inherits": "base",
+      "configurePreset": "x64-darwin-gcc-static"
+    },
+    {
+      "name": "x64-darwin-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-darwin-gcc-dynamic"
+    },
+    {
+      "name": "x64-darwin-gcc",
+      "inherits": "x64-darwin-gcc-dynamic",
+      "configurePreset": "x64-darwin-gcc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-darwin-gcc-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-darwin-gcc-static"
+        },
+        {
+          "type": "build",
+          "name": "x64-darwin-gcc-static"
+        },
+        {
+          "type": "test",
+          "name": "x64-darwin-gcc-static"
+        }
+      ]
+    },
+    {
+      "name": "x64-darwin-gcc-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-darwin-gcc-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "x64-darwin-gcc-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "x64-darwin-gcc-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "x64-darwin-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-darwin-gcc"
+        },
+        {
+          "type": "build",
+          "name": "x64-darwin-gcc"
+        },
+        {
+          "type": "test",
+          "name": "x64-darwin-gcc"
+        }
+      ]
+    }
+  ]
+}
