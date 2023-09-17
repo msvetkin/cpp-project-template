@@ -9,6 +9,13 @@
         "lhs": "${hostSystemName}",
         "rhs": "Darwin"
       }
+    },
+    {
+      "name": "x64-darwin",
+      "inherits": "darwin",
+      "cacheVariables": {
+        "CMAKE_APPLE_SILICON_PROCESSOR": "x86_64"
+      }
     }
   ],
   "buildPresets": [
