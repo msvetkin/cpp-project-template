@@ -13,18 +13,14 @@
         "x64-darwin",
         "x64-gcc"
       ],
-      "displayName": "x64 darwin gcc static libs",
-      "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-osx"
-      }
+      "displayName": "x64 darwin gcc static libs"
     },
     {
       "name": "x64-darwin-gcc-dynamic",
       "inherits": "x64-darwin-gcc-static",
       "displayName": "x64 darwin gcc dynamic libs",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": true,
-        "VCPKG_TARGET_TRIPLET": "x64-osx-dynamic"
+        "BUILD_SHARED_LIBS": true
       }
     },
     {
