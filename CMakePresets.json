@@ -6,6 +6,8 @@
     "patch": 0
   },
   "include": [
+    "cmake/presets/x64-darwin-gcc.json",
+    "cmake/presets/x64-darwin-clang.json",
     "cmake/presets/x64-linux-gcc.json",
     "cmake/presets/x86-linux-gcc.json",
     "cmake/presets/x64-linux-clang.json",

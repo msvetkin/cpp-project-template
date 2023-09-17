@@ -1,0 +1,28 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "darwin",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "darwin",
+      "hidden": true,
+      "configurePreset": "darwin"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "darwin",
+      "hidden": true,
+      "configurePreset": "darwin"
+    }
+  ]
+}
