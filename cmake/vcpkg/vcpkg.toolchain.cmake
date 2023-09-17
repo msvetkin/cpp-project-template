@@ -13,6 +13,11 @@ endif()
 
 unset(IN_TRY_COMPILE)
 
+if (NOT DEFINED CACHE{VCPKG_TARGET_TRIPLET} AND DEFINED PRESET_NAME_TO_VCPKG_TARGET_TRIPLET)
+  include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_autodetect_target_triplet.cmake)
+  vcpkg_autodetect_target_target_triplet()
+endif()
+
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_bootstrap.cmake)
 
 vcpkg_bootstrap(

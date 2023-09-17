@@ -13,18 +13,14 @@
         "x64-darwin",
         "x64-clang"
       ],
-      "displayName": "x64 darwin clang static libs",
-      "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-osx"
-      }
+      "displayName": "x64 darwin clang static libs"
     },
     {
       "name": "x64-darwin-clang-dynamic",
       "inherits": "x64-darwin-clang-static",
       "displayName": "x64 darwin clang dynamic libs",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": true,
-        "VCPKG_TARGET_TRIPLET": "x64-osx-dynamic"
+        "BUILD_SHARED_LIBS": true
       }
     },
     {
