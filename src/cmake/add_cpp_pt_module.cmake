@@ -29,7 +29,6 @@ install(
 install(
   FILES cmake/@cpp_pt_name@-config.cmake
         ${CMAKE_CURRENT_BINARY_DIR}/@cpp_pt_name@-config-version.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/@cpp_pt_name@-config-version.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/@cpp_pt_name@
 )
 
