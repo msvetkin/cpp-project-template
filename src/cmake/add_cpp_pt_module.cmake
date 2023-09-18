@@ -3,34 +3,7 @@
 
 include_guard(GLOBAL)
 
-include(GNUInstallDirs)
-
-# global target
-add_library(@cpp_pt_name@ INTERFACE)
-add_library(@cpp_pt_name@::@cpp_pt_name@ ALIAS @cpp_pt_name@)
-install(TARGETS @cpp_pt_name@ EXPORT @cpp_pt_name@-targets)
-
-# local build
-export(EXPORT @cpp_pt_name@-targets NAMESPACE @cpp_pt_name@::)
-configure_file("cmake/@cpp_pt_name@-config.cmake" "." COPYONLY)
-
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(
-  @cpp_pt_name@-config-version.cmake COMPATIBILITY SameMajorVersion
-)
-
-# installation
-install(
-  EXPORT @cpp_pt_name@-targets
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/@cpp_pt_name@
-  NAMESPACE @cpp_pt_name@::
-)
-
-install(
-  FILES cmake/@cpp_pt_name@-config.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/@cpp_pt_name@-config-version.cmake
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/@cpp_pt_name@
-)
+include(set_@cpp_pt_cmake@_target_properties)
 
 # sets all nessary default things
 function(add_@cpp_pt_cmake@_module module_name)
@@ -47,6 +20,8 @@ function(add_@cpp_pt_cmake@_module module_name)
     set(module_type "PUBLIC")
   endif()
 
+  set_@cpp_pt_cmake@_target_properties(${module_target} ${module_type})
+
   target_include_directories(
     ${module_target} ${module_type}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -56,10 +31,11 @@ function(add_@cpp_pt_cmake@_module module_name)
 
   target_link_libraries(${module_target} ${module_type})
 
-  install(TARGETS ${module_target} EXPORT @cpp_pt_name@-targets)
-  install(DIRECTORY include/@cpp_pt_name@/${module_name} TYPE INCLUDE)
-
-  target_link_libraries(@cpp_pt_name@ INTERFACE ${module_target})
+  if (TARGET @cpp_pt_name@)
+    target_link_libraries(@cpp_pt_name@ INTERFACE ${module_target})
+    install(TARGETS ${module_target} EXPORT @cpp_pt_name@-targets)
+    install(DIRECTORY include/@cpp_pt_name@/${module_name} TYPE INCLUDE)
+  endif()
 
   set(@cpp_pt_cmake@_module_target
       ${module_target}

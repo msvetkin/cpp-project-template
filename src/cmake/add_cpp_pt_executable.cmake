@@ -3,11 +3,15 @@
 
 include_guard(GLOBAL)
 
+include(set_@cpp_pt_cmake@_target_properties)
+
 # sets all nessary default things
 function(add_@cpp_pt_cmake@_executable executable_name)
   set(executable_target @cpp_pt_cmake@_${executable_name})
 
   add_executable(${executable_target} ${ARGN})
+  set_@cpp_pt_cmake@_target_properties(${executable_target} PRIVATE)
+
 
   install(TARGETS ${executable_target} EXPORT @cpp_pt_name@-targets)
 

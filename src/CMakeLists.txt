@@ -11,6 +11,7 @@ project(
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
+include(@cpp_pt_name@-install-targets)
 include(add_@cpp_pt_cmake@_module)
 include(add_@cpp_pt_cmake@_executable)
 
