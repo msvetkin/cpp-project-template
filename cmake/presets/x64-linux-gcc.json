@@ -11,7 +11,7 @@
       "inherits": [
         "base",
         "linux",
-        "x64-gcc"
+        "gcc"
       ],
       "displayName": "x64 linux gcc static libs"
     },

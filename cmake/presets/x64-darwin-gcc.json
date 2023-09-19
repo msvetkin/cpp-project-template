@@ -11,7 +11,7 @@
       "inherits": [
         "base",
         "x64-darwin",
-        "x64-gcc"
+        "gcc"
       ],
       "displayName": "x64 darwin gcc static libs"
     },

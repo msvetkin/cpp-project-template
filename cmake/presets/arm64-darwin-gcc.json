@@ -1,0 +1,119 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/darwin.json",
+    "compilers/gcc.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "arm64-darwin-gcc-static",
+      "inherits": [
+        "base",
+        "arm64-darwin",
+        "gcc"
+      ],
+      "displayName": "arm64 darwin gcc static libs"
+    },
+    {
+      "name": "arm64-darwin-gcc-dynamic",
+      "inherits": "arm64-darwin-gcc-static",
+      "displayName": "arm64 darwin gcc dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "arm64-darwin-gcc",
+      "inherits": "arm64-darwin-gcc-dynamic",
+      "displayName": "alias to arm64-darwin-gcc-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "arm64-darwin-gcc-static",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-gcc-static"
+    },
+    {
+      "name": "arm64-darwin-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-gcc-dynamic"
+    },
+    {
+      "name": "arm64-darwin-gcc",
+      "inherits": "arm64-darwin-gcc-dynamic",
+      "configurePreset": "arm64-darwin-gcc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "arm64-darwin-gcc-static",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-gcc-static"
+    },
+    {
+      "name": "arm64-darwin-gcc-dynamic",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-gcc-dynamic"
+    },
+    {
+      "name": "arm64-darwin-gcc",
+      "inherits": "arm64-darwin-gcc-dynamic",
+      "configurePreset": "arm64-darwin-gcc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "arm64-darwin-gcc-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-gcc-static"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-gcc-static"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-gcc-static"
+        }
+      ]
+    },
+    {
+      "name": "arm64-darwin-gcc-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-gcc-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-gcc-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-gcc-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "arm64-darwin-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-gcc"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-gcc"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-gcc"
+        }
+      ]
+    }
+  ]
+}

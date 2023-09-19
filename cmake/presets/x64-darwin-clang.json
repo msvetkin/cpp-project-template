@@ -11,7 +11,7 @@
       "inherits": [
         "base",
         "x64-darwin",
-        "x64-clang"
+        "clang"
       ],
       "displayName": "x64 darwin clang static libs"
     },

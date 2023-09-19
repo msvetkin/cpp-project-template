@@ -1,0 +1,119 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/darwin.json",
+    "compilers/clang.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "arm64-darwin-clang-static",
+      "inherits": [
+        "base",
+        "arm64-darwin",
+        "clang"
+      ],
+      "displayName": "arm64 darwin clang static libs"
+    },
+    {
+      "name": "arm64-darwin-clang-dynamic",
+      "inherits": "arm64-darwin-clang-static",
+      "displayName": "arm64 darwin clang dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "arm64-darwin-clang",
+      "inherits": "arm64-darwin-clang-dynamic",
+      "displayName": "alias to arm64-darwin-clang-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "arm64-darwin-clang-static",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-clang-static"
+    },
+    {
+      "name": "arm64-darwin-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-clang-dynamic"
+    },
+    {
+      "name": "arm64-darwin-clang",
+      "inherits": "arm64-darwin-clang-dynamic",
+      "configurePreset": "arm64-darwin-clang"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "arm64-darwin-clang-static",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-clang-static"
+    },
+    {
+      "name": "arm64-darwin-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "arm64-darwin-clang-dynamic"
+    },
+    {
+      "name": "arm64-darwin-clang",
+      "inherits": "arm64-darwin-clang-dynamic",
+      "configurePreset": "arm64-darwin-clang"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "arm64-darwin-clang-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-clang-static"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-clang-static"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-clang-static"
+        }
+      ]
+    },
+    {
+      "name": "arm64-darwin-clang-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-clang-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-clang-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-clang-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "arm64-darwin-clang",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "arm64-darwin-clang"
+        },
+        {
+          "type": "build",
+          "name": "arm64-darwin-clang"
+        },
+        {
+          "type": "test",
+          "name": "arm64-darwin-clang"
+        }
+      ]
+    }
+  ]
+}

@@ -12,9 +12,18 @@
     },
     {
       "name": "x64-darwin",
+      "hidden": true,
       "inherits": "darwin",
       "cacheVariables": {
         "CMAKE_APPLE_SILICON_PROCESSOR": "x86_64"
+      }
+    },
+    {
+      "name": "arm64-darwin",
+      "hidden": true,
+      "inherits": "darwin",
+      "cacheVariables": {
+        "CMAKE_APPLE_SILICON_PROCESSOR": "arm64"
       }
     }
   ],

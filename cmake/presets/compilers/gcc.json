@@ -10,15 +10,6 @@
       }
     },
     {
-      "name": "x64-gcc",
-      "hidden": true,
-      "inherits": "gcc",
-      "environment": {
-        "CC": "gcc",
-        "CXX": "g++"
-      }
-    },
-    {
       "name": "x86-gcc",
       "hidden": true,
       "inherits": "gcc",

@@ -10,15 +10,6 @@
       }
     },
     {
-      "name": "x64-clang",
-      "hidden": true,
-      "inherits": "clang",
-      "environment": {
-        "CC": "clang",
-        "CXX": "clang++"
-      }
-    },
-    {
       "name": "x86-clang",
       "hidden": true,
       "inherits": "clang",
