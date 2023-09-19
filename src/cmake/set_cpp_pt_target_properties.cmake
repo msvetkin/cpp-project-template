@@ -17,6 +17,13 @@ function(set_@cpp_pt_cmake@_target_properties target type)
       VISIBILITY_INLINES_HIDDEN ON
   )
 
+  if (NOT CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+    target_compile_options(${target} ${type}
+      $<$<CXX_COMPILER_ID:MSVC>:/W4>
+      $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
+    )
+  endif()
+
   target_link_libraries(${target}
     ${type}
       fmt::fmt
