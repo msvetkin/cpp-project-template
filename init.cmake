@@ -86,6 +86,7 @@ foreach(template IN LISTS templates)
   generate("${template}")
 endforeach()
 
+file(REMOVE "init.cmake")
 execute_process(COMMAND "${GIT_EXECUTABLE}" add "${CMAKE_SOURCE_DIR}")
 
 message(STATUS "----------------")

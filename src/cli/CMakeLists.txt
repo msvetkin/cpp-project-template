@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Mikhail Svetkin <mikhail.svetkin@gmail.com>
+# SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
 add_@cpp_pt_cmake@_executable(cli)

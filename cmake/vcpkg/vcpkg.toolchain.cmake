@@ -26,4 +26,4 @@ vcpkg_bootstrap(
   REF 9edb1b8e590cc086563301d735cae4b6e732d2d2 # release 2023.08.09
 )
 
-include($CACHE{VCPKG_TOOLCHAIN_FILE})
+include($CACHE{_VCPKG_TOOLCHAIN_FILE})

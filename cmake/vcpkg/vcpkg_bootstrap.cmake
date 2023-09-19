@@ -137,24 +137,12 @@ endfunction()
 
 # set vcpkg_root/executable/toolchain_file cache variables
 function(_vcpkg_set_cache_variables vcpkg_root)
-  set(VCPKG_ROOT
+  set(_VCPKG_ROOT
       "${vcpkg_root}"
       CACHE INTERNAL "vcpkg root"
   )
 
-  if(WIN32)
-    set(VCPKG_EXECUTABLE
-        "${vcpkg_root}/vcpkg.exe"
-        CACHE INTERNAL "vcpkg executable"
-    )
-  else()
-    set(VCPKG_EXECUTABLE
-        "${vcpkg_root}/vcpkg"
-        CACHE INTERNAL "vcpkg executable"
-    )
-  endif()
-
-  set(VCPKG_TOOLCHAIN_FILE
+  set(_VCPKG_TOOLCHAIN_FILE
       "${vcpkg_root}/scripts/buildsystems/vcpkg.cmake"
       CACHE INTERNAL "vcpkg toolchain file"
   )
@@ -170,13 +158,16 @@ function(vcpkg_bootstrap)
   )
 
   if (DEFINED arg_UNPARSED_ARGUMENTS)
-    message(FATAL_ERROR "internal error: ${CMAKE_CURRENT_FUNCTION} passed extra args: ${arg_UNPARSED_ARGUMENTS}")
+    message(FATAL_ERROR
+      "internal error: ${CMAKE_CURRENT_FUNCTION} passed extra args:"
+      "${arg_UNPARSED_ARGUMENTS}"
+    )
   endif()
 
   find_package(Git QUIET REQUIRED)
 
-  if(DEFINED CACHE{VCPKG_ROOT})
-    set(vcpkg_root $CACHE{VCPKG_ROOT})
+  if(DEFINED CACHE{_VCPKG_ROOT})
+    set(vcpkg_root $CACHE{_VCPKG_ROOT})
   else()
     _vcpkg_find_root("${arg_CACHE_DIR_NAME}" vcpkg_root)
   endif()
@@ -190,7 +181,7 @@ function(vcpkg_bootstrap)
     _vcpkg_upgrade(${vcpkg_root} ${arg_REPO} ${arg_REF})
   endif()
 
-  if(DEFINED CACHE{VCPKG_TOOLCHAIN_FILE})
+  if(DEFINED CACHE{_VCPKG_TOOLCHAIN_FILE})
     return()
   endif()
 
