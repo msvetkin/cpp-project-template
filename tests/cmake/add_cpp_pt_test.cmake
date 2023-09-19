@@ -5,6 +5,10 @@ include_guard(GLOBAL)
 
 find_package(Catch2 CONFIG REQUIRED)
 
+if (CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+  find_package(@cpp_pt_name@ CONFIG REQUIRED)
+endif()
+
 include(CTest)
 include(Catch)
 
@@ -16,6 +20,7 @@ function(add_@cpp_pt_cmake@_test test_name)
   set(test_target "${module_name}-${test_name}")
 
   add_executable(${test_target} "${test_file}")
+
   target_link_libraries(
     ${test_target} PRIVATE @cpp_pt_name@::${module_name} Catch2::Catch2WithMain
   )

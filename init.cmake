@@ -32,6 +32,7 @@ string(REPLACE " " "-" cpp_pt_name "${arg_--project}")
 string(REPLACE " " "_" cpp_pt_cmake "${arg_--project}")
 string(REPLACE " " "-" cpp_pt_module "${arg_--module}")
 string(REPLACE " " "-" cpp_pt_module_header "${arg_--header}")
+string(TOUPPER "${cpp_pt_cmake}_${cpp_pt_module}_EXPORT" cpp_pt_module_export)
 
 message(STATUS "----------------")
 message(STATUS "project name:    ${cpp_pt_name}")

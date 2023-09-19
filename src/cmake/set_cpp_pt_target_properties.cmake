@@ -11,8 +11,10 @@ find_package(range-v3 CONFIG REQUIRED)
 function(set_@cpp_pt_cmake@_target_properties target type)
   target_compile_features(${target} ${type} cxx_std_20)
   set_target_properties(${target}
-   PROPERTIES
-     CXX_STANDARD_REQUIRED ON
+    PROPERTIES
+      CXX_STANDARD_REQUIRED ON
+      CXX_VISIBILITY_PRESET hidden
+      VISIBILITY_INLINES_HIDDEN ON
   )
 
   target_link_libraries(${target}

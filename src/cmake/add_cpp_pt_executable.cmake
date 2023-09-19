@@ -12,7 +12,6 @@ function(add_@cpp_pt_cmake@_executable executable_name)
   add_executable(${executable_target} ${ARGN})
   set_@cpp_pt_cmake@_target_properties(${executable_target} PRIVATE)
 
-
   if (TARGET @cpp_pt_name@)
     install(TARGETS ${executable_target} EXPORT @cpp_pt_name@-targets)
   endif()
