@@ -7,7 +7,7 @@ include(set_@cpp_pt_cmake@_target_properties)
 
 # sets all nessary default things
 function(add_@cpp_pt_cmake@_module module_name)
-  set(module_target @cpp_pt_cmake@_${module_name})
+  set(module_target @cpp_pt_cmake@-${module_name})
   set(module_alias @cpp_pt_name@::${module_name})
 
   add_library(${module_target} ${ARGN})

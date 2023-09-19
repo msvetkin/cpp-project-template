@@ -61,6 +61,9 @@ set(templates
     src/${cpp_pt_module}/include/cpp-pt
     src/${cpp_pt_module}/include/${cpp_pt_name}/module-1
     src/${cpp_pt_module}/include/${cpp_pt_name}/${cpp_pt_module}/header-1.hpp
+    src/${cpp_pt_module}/src/header-1.cpp
+    src/cli/CMakeLists.txt
+    src/cli/src/main.cpp
     src/cmake/add_cpp_pt_executable.cmake
     src/cmake/add_cpp_pt_module.cmake
     src/cmake/cpp-pt-config.cmake

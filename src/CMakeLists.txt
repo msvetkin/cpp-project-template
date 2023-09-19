@@ -15,9 +15,5 @@ include(@cpp_pt_name@-install-targets)
 include(add_@cpp_pt_cmake@_module)
 include(add_@cpp_pt_cmake@_executable)
 
-find_package(fmt CONFIG REQUIRED)
-find_package(Microsoft.GSL CONFIG REQUIRED)
-find_package(range-v3 CONFIG REQUIRED)
-
 add_subdirectory(@cpp_pt_module@)
-# add_subdirectory(cli)
+add_subdirectory(cli)
