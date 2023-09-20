@@ -88,7 +88,8 @@ endforeach()
 
 file(REMOVE "init.cmake")
 file(REMOVE "README.md")
-file(WRITE "README.md" "Welcome to ${cpp_pt_name}")
+file(WRITE "README.md" "# Welcome to ${cpp_pt_name}")
+file(RENAME ".github/ci.yaml" ".github/workflows/ci.yaml")
 execute_process(COMMAND "${GIT_EXECUTABLE}" add "${CMAKE_SOURCE_DIR}")
 
 message(STATUS "----------------")
