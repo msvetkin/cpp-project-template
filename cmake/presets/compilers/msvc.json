@@ -1,0 +1,13 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "msvc",
+      "hidden": true,
+      "environment": {
+        "CC": "cl.exe",
+        "CXX": "cl.exe"
+      }
+    }
+  ]
+}
