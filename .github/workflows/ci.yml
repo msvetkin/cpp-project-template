@@ -25,6 +25,8 @@ jobs:
       with:
         preset: ${{matrix.target.preset}}
 
+    - uses: ./.github/actions/vcpkg-cache
+
     - name: CMake workflow
       shell: bash
       run: |
