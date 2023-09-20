@@ -123,7 +123,9 @@ endfunction()
 
 # find root
 function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
-  if(WIN32)
+  if (DEFINED ENV{VCPKG_INSTALLATION_ROOT})
+    set(root "$ENV{VCPKG_INSTALLATION_ROOT}")
+  elseif(WIN32)
     set(root "$ENV{LOCALAPPDATA}/vcpkg/projects/${cache_dir_name}/cache")
   else()
     set(root "$ENV{HOME}/.cache/vcpkg/projects/${cache_dir_name}")
