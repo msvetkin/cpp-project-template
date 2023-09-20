@@ -87,6 +87,8 @@ foreach(template IN LISTS templates)
 endforeach()
 
 file(REMOVE "init.cmake")
+file(REMOVE "README.md")
+file(WRITE "README.md" "Welcome to ${cpp_pt_name}")
 execute_process(COMMAND "${GIT_EXECUTABLE}" add "${CMAKE_SOURCE_DIR}")
 
 message(STATUS "----------------")
