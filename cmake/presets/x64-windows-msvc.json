@@ -1,0 +1,119 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/windows.json",
+    "compilers/msvc.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-windows-msvc-static",
+      "inherits": [
+        "base",
+        "windows",
+        "msvc"
+      ],
+      "displayName": "x64 windows msvc static libs"
+    },
+    {
+      "name": "x64-windows-msvc-dynamic",
+      "inherits": "x64-windows-msvc-static",
+      "displayName": "x64 windows msvc dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "x64-windows-msvc",
+      "inherits": "x64-windows-msvc-dynamic",
+      "displayName": "alias to x64-windows-msvc-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-windows-msvc-static",
+      "inherits": "base",
+      "configurePreset": "x64-windows-msvc-static"
+    },
+    {
+      "name": "x64-windows-msvc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-windows-msvc-dynamic"
+    },
+    {
+      "name": "x64-windows-msvc",
+      "inherits": "x64-windows-msvc-dynamic",
+      "configurePreset": "x64-windows-msvc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-windows-msvc-static",
+      "inherits": "base",
+      "configurePreset": "x64-windows-msvc-static"
+    },
+    {
+      "name": "x64-windows-msvc-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-windows-msvc-dynamic"
+    },
+    {
+      "name": "x64-windows-msvc",
+      "inherits": "x64-windows-msvc-dynamic",
+      "configurePreset": "x64-windows-msvc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-windows-msvc-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-msvc-static"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-msvc-static"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-msvc-static"
+        }
+      ]
+    },
+    {
+      "name": "x64-windows-msvc-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-msvc-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-msvc-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-msvc-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "x64-windows-msvc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-msvc"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-msvc"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-msvc"
+        }
+      ]
+    }
+  ]
+}

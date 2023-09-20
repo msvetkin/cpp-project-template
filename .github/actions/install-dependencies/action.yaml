@@ -1,0 +1,56 @@
+name: Install dependencies
+
+inputs:
+  preset:
+    description: 'cmake preset'
+    required: true
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Parse preset
+      id: preset
+      shell: bash
+      run: |
+        IFS='-' read -r arch os compiler linkage <<< "${{ inputs.preset }}"
+        echo "os=$os" >> "$GITHUB_OUTPUT"
+
+        if [ -d "./.github/actions/${os}/${compiler}" ]; then
+          echo "compiler_dir=true" >> "$GITHUB_OUTPUT"
+          echo "compiler=$compiler" >> "$GITHUB_OUTPUT"
+        else
+          echo "compiler_dir=false" >> "$GITHUB_OUTPUT"
+        fi
+
+        if [ -d "./.github/actions/${os}/${arch}" ]; then
+          echo "arch_dir=true" >> "$GITHUB_OUTPUT"
+          echo "arch=$arch" >> "$GITHUB_OUTPUT"
+        else
+          echo "arch_dir=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Select dependencies
+      shell: bash
+      run: |
+        echo "steps.preset.outputs.arch_dir: ${{steps.preset.outputs.arch_dir}}"
+        mkdir -p ./.selected-dependencies &&
+        cat <<EOF >./.selected-dependencies/action.yml
+        runs:
+          using: composite
+          steps:
+            - uses: ./.github/actions/${{ steps.preset.outputs.os }}/base
+            - if: ${{ steps.preset.outputs.compiler_dir }}
+              uses: ./.github/actions/${{ steps.preset.outputs.os }}/${{ steps.preset.outputs.compiler }}
+            - if: ${{ steps.preset.outputs.arch_dir }}
+              uses: ./.github/actions/${{ steps.preset.outputs.os }}/${{ steps.preset.outputs.arch }}
+        EOF
+
+    - name: Install
+      id: install
+      uses: ./.selected-dependencies
+
+    - name: Cleanup
+      if: always()
+      shell: bash
+      run: rm -rf ./.selected-dependencies

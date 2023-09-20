@@ -1,0 +1,31 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{matrix.target.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [
+          { os: ubuntu-latest, preset: x64-linux-gcc-dynamic },
+          { os: ubuntu-latest, preset: x86-linux-gcc-dynamic },
+          { os: ubuntu-latest, preset: x64-linux-clang-dynamic },
+          { os: ubuntu-latest, preset: x86-linux-clang-dynamic },
+          { os: macos-latest, preset: x64-darwin-gcc-dynamic },
+          { os: macos-latest, preset: x64-darwin-clang-dynamic },
+          { os: windows-latest, preset: x64-windows-msvc-dynamic },
+        ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ./.github/actions/install-dependencies
+      with:
+        preset: ${{matrix.target.preset}}
+
+    - name: CMake workflow
+      shell: bash
+      run: |
+        cmake --workflow --preset ${{matrix.target.preset}}

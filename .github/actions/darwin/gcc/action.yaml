@@ -1,0 +1,9 @@
+name: "Ubuntu latest gcc"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install g++
+      shell: bash
+      run: |
+        brew install gcc

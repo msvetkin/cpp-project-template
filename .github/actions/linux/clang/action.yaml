@@ -1,0 +1,9 @@
+name: "Ubuntu latest clang"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install clang
+      shell: bash
+      run: |
+        sudo apt-get install -y clang
