@@ -41,3 +41,12 @@ This will populate the `build/<PRESET>` folder with the binaries for all of your
 By default, this template comes with a CLI entrypoint defined in [`src/cli/src/main.cpp`](src/cli/src/main.cpp). This Command Line Interface can be run after building by the `build/<PRESET>/src/cli/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_cli` executable(s).
 
 Tests are run with [Catch2](https://github.com/catchorg/Catch2). They can be written in the [`tests`](tests) subdirectory, and run from the `build/<PRESET>/tests/<PROJECT_NAME>_module/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_module-<MODULE_NAME>` executable.
+
+For usage within another C++ project, you can add the following to your CMake configuration:
+
+```cmake
+find_package(<PROJECT_NAME> CONFIG REQUIRED)
+target_link_libraries(<TARGET> PUBLIC <PROJECT_NAME>::<MODULE_NAME>)
+```
+
+This will require that your library is published and installed via vcpkg or found locally by setting the `<PROJECT_NAME>_DIR` environment variable in your other project during configure.
