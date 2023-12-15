@@ -16,29 +16,38 @@ cmake -P init.cmake --project <name> --module <name> --header <name>
 
 ## Building
 
-To build the project locally, you will need to select a [CMake](https://cmake.org/) preset that matches your system configuration. Your system's configuration is described by a [triplet](https://wiki.osdev.org/Target_Triplet).
+To build the project locally, you will need to select a [CMake](https://cmake.org/) preset that matches your system configuration. Your system's configuration is described by a [triplet](https://wiki.osdev.org/Target_Triplet). This is inspired by [rust triples](https://doc.rust-lang.org/nightly/rustc/platform-support.html).
 
-Presets for the most common system triplets are defined in [`CMakePresets.json`](./CMakePresets.json). 
+Presets for the most common system triplets are defined in [`cmake/presets/`](./cmake/presets/) and presented via [`CMakePresets.json`](./CMakePresets.json). 
 
-Notice that each system triplet defines a preset for multiple compilers. If you have a compiler preference, you can pick the respective preset. If you do not have a preference, you can choose [GCC](https://gcc.gnu.org/), which should be available on most systems.
+Notice that each system triplet defines a preset for multiple compilers. If you have a compiler preference, you can pick the respective preset. If you do not have a preference, you can choose the following reccomendation (depending on your OS): 
 
-Now you can configure your project:
+ - Windows: `msvc`
+ - MacOS: `clang`
+ - Linux: `gcc`
+
+Now you can configure and build your project:
 
 ```sh
+cmake --workflow --preset=<PRESET>
+```
+
+This is equivalend to running the following in a step-by-step proceedure:
+
+```sh
+# Configure
 cmake --preset=<PRESET>
-```
-
-And finally build:
-
-```sh
+# Build
 cmake --build --preset=<PRESET>
+# Test
+ctest --preset=<PRESET>
 ```
 
-This will populate the `build/<PRESET>` folder with the binaries for all of your [CMake targets](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Key%20Concepts.html#targets).
+Regardless of how you build, the `build/<PRESET>` folder will be populated with the binaries for all of your [CMake targets](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Key%20Concepts.html#targets).
 
 ## Usage
 
-By default, this template comes with a CLI entrypoint defined in [`src/cli/src/main.cpp`](src/cli/src/main.cpp). This Command Line Interface can be run after building by the `build/<PRESET>/src/cli/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_cli` executable(s).
+By default, this template comes with a CLI entrypoint defined in [`src/cli/src/main.cpp`](src/cli/src/main.cpp), and one module/library defined in your `src` folder. The Command Line Interface contains a very basic `main` function, and can be run after building by the `build/<PRESET>/src/cli/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_cli` executable(s).
 
 Tests are run with [Catch2](https://github.com/catchorg/Catch2). They can be written in the [`tests`](tests) subdirectory, and run from the `build/<PRESET>/tests/<PROJECT_NAME>_module/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_module-<MODULE_NAME>` executable.
 
