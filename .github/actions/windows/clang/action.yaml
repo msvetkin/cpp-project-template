@@ -1,0 +1,9 @@
+name: "Windows activate clang"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: egor-tensin/setup-clang@v1
+      with:
+        version: 16
+        platform: x64
