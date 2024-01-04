@@ -1,0 +1,119 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/windows.json",
+    "compilers/clang.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-windows-clang-static",
+      "inherits": [
+        "base",
+        "windows",
+        "clang"
+      ],
+      "displayName": "x64 windows clang static libs"
+    },
+    {
+      "name": "x64-windows-clang-dynamic",
+      "inherits": "x64-windows-clang-static",
+      "displayName": "x64 windows clang dynamic libs",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "x64-windows-clang",
+      "inherits": "x64-windows-clang-dynamic",
+      "displayName": "alias to x64-windows-clang-dynamic"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-windows-clang-static",
+      "inherits": "base",
+      "configurePreset": "x64-windows-clang-static"
+    },
+    {
+      "name": "x64-windows-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-windows-clang-dynamic"
+    },
+    {
+      "name": "x64-windows-clang",
+      "inherits": "x64-windows-clang-dynamic",
+      "configurePreset": "x64-windows-clang"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-windows-clang-static",
+      "inherits": "base",
+      "configurePreset": "x64-windows-clang-static"
+    },
+    {
+      "name": "x64-windows-clang-dynamic",
+      "inherits": "base",
+      "configurePreset": "x64-windows-clang-dynamic"
+    },
+    {
+      "name": "x64-windows-clang",
+      "inherits": "x64-windows-clang-dynamic",
+      "configurePreset": "x64-windows-clang"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-windows-clang-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-clang-static"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-clang-static"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-clang-static"
+        }
+      ]
+    },
+    {
+      "name": "x64-windows-clang-dynamic",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-clang-dynamic"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-clang-dynamic"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-clang-dynamic"
+        }
+      ]
+    },
+    {
+      "name": "x64-windows-clang",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-windows-clang"
+        },
+        {
+          "type": "build",
+          "name": "x64-windows-clang"
+        },
+        {
+          "type": "test",
+          "name": "x64-windows-clang"
+        }
+      ]
+    }
+  ]
+}
