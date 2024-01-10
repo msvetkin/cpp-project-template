@@ -9,6 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [
+          { os: ubuntu-22.04, preset: wasm32-wasi-clang-static },
           { os: ubuntu-latest, preset: x64-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x86-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x64-linux-clang-dynamic },

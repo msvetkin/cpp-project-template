@@ -1,11 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "@cpp_pt_name@",
   "version-string": "0.0.1",
   "dependencies": [
-    "fmt",
+    { "name": "fmt", "platform": "!wasm32" },
+    { "name": "catch2", "platform": "!wasm32" },
     "range-v3",
-    "ms-gsl",
-    "catch2"
+    "ms-gsl"
   ]
 }

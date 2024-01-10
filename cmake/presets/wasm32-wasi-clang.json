@@ -1,0 +1,48 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "compilers/clang.json",
+    "toolchains/wasi-sdk.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "wasm32-wasi-clang-static",
+      "inherits": [
+        "base",
+        "wasi-sdk",
+        "clang"
+      ],
+      "displayName": "WASM32 WASI clang static libs"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "wasm32-wasi-clang-static",
+      "inherits": "base",
+      "configurePreset": "wasm32-wasi-clang-static"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "wasm32-wasi-clang-static",
+      "inherits": "base",
+      "configurePreset": "wasm32-wasi-clang-static"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "wasm32-wasi-clang-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "wasm32-wasi-clang-static"
+        },
+        {
+          "type": "build",
+          "name": "wasm32-wasi-clang-static"
+        }
+      ]
+    }
+  ]
+}
