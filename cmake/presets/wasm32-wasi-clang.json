@@ -23,13 +23,6 @@
       "configurePreset": "wasm32-wasi-clang-static"
     }
   ],
-  "testPresets": [
-    {
-      "name": "wasm32-wasi-clang-static",
-      "inherits": "base",
-      "configurePreset": "wasm32-wasi-clang-static"
-    }
-  ],
   "workflowPresets": [
     {
       "name": "wasm32-wasi-clang-static",

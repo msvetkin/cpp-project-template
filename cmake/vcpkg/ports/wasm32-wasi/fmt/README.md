@@ -1,0 +1,1 @@
+This overlay port is a direct copy from https://github.com/microsoft/vcpkg/tree/master/ports/fmt with modifications to allow compilation on wasm32-wasi as a target by removing POSIX filesystem calls.

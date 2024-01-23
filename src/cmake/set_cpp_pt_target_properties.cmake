@@ -3,14 +3,9 @@
 
 include_guard(GLOBAL)
 
-if (WASI)
-  find_package(Microsoft.GSL CONFIG REQUIRED)
-  find_package(range-v3 CONFIG REQUIRED)
-else()
-  find_package(fmt CONFIG REQUIRED)
-  find_package(Microsoft.GSL CONFIG REQUIRED)
-  find_package(range-v3 CONFIG REQUIRED)
-endif()
+find_package(fmt CONFIG REQUIRED)
+find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
 
 # sets default target properties
 function(set_@cpp_pt_cmake@_target_properties target type)
@@ -31,7 +26,7 @@ function(set_@cpp_pt_cmake@_target_properties target type)
 
   target_link_libraries(${target}
     ${type}
-      $<$<NOT:$<PLATFORM_ID:WASI>>:fmt::fmt>
+      fmt::fmt
       range-v3::range-v3
       Microsoft.GSL::GSL
   )
