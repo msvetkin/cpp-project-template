@@ -1,0 +1,15 @@
+name: "Ubuntu latest clang"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install clang/llvm 17
+      shell: bash
+      run: |
+        sudo apt-add-repository 'deb https://apt.llvm.org/jammy llvm-toolchain-jammy-17 main'
+        sudo wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+        sudo apt-get update
+        sudo apt-get install -y -t llvm-toolchain-jammy-17 \
+            clang-17 llvm-17 lld-17 lldb-17 libc++-17-dev \
+            libc++abi-17-dev libclang-rt-17-dev
+        for f in /usr/lib/llvm-*/bin/*; do sudo ln -sf "$f" /usr/bin; done

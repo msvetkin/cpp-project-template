@@ -13,14 +13,18 @@
         "linux",
         "clang"
       ],
-      "displayName": "x64 linux clang static libs"
+      "displayName": "x64 linux clang static libs",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
+      }
     },
     {
       "name": "x64-linux-clang-dynamic",
       "inherits": "x64-linux-clang-static",
       "displayName": "x64 linux clang dynamic libs",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": true
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
       }
     },
     {
