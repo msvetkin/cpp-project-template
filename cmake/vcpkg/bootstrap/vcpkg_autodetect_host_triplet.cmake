@@ -24,5 +24,4 @@ function(_vcpkg_autodetect_host_triplet)
 
   set(VCPKG_HOST_TRIPLET "${host_triplet_arch}-${host_triplet_os}"
       CACHE STRING "Auto detected vcpkg host triplet")
-  message(STATUS "Auto detected VCPKG_HOST_TRIPLET: ${VCPKG_HOST_TRIPLET}")
 endfunction()
