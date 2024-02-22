@@ -6,6 +6,7 @@ function(vcpkg_configure)
   _vcpkg_bootstrap(${ARGN})
   _vcpkg_autodetect_target_triplet()
   _vcpkg_autodetect_host_triplet()
+  _vcpkg_skip_install_on_reconfigure()
 
   if ("${__vcpkg_bootstrap_host}" STREQUAL "Linux"
       AND "${__vcpkg_bootstrap_arch}" MATCHES "arm|aarch")
