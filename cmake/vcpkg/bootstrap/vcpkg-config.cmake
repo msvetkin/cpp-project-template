@@ -10,5 +10,6 @@ cmake_host_system_information(RESULT __vcpkg_bootstrap_arch QUERY OS_PLATFORM)
 set(__vcpkg_bootstrap_list_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_autodetect_target_triplet.cmake)
+include(${__vcpkg_bootstrap_list_dir}/vcpkg_autodetect_host_triplet.cmake)
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_bootstrap.cmake)
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_configure.cmake)
