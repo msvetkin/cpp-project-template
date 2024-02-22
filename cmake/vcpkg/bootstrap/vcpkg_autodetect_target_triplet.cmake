@@ -31,7 +31,6 @@ function(_vcpkg_autodetect_target_triplet)
 
   list(JOIN triplet_parts "-" vcpkg_target_triplet)
 
-  message(STATUS "Auto detected VCPKG_TARGET_TRIPLET: ${vcpkg_target_triplet}")
   set(VCPKG_TARGET_TRIPLET "${vcpkg_target_triplet}"
       CACHE STRING "Auto detected vcpkg target triplet")
 endfunction()
