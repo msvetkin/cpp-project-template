@@ -1,10 +1,6 @@
 # SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
-# CMAKE_HOST_* variables are not available during first configure on windows.
-cmake_host_system_information(RESULT __vcpkg_bootstrap_host QUERY OS_NAME)
-cmake_host_system_information(RESULT __vcpkg_bootstrap_arch QUERY OS_PLATFORM)
-
 # stash all local changes
 function(_vcpkg_stash vcpkg_root)
   message(STATUS "vcpkg stash all local changes")
