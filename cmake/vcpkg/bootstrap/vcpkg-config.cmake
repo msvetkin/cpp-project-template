@@ -11,3 +11,4 @@ set(__vcpkg_bootstrap_list_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_autodetect_target_triplet.cmake)
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_bootstrap.cmake)
+include(${__vcpkg_bootstrap_list_dir}/vcpkg_configure.cmake)
