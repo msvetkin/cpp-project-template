@@ -5,4 +5,5 @@
 function(vcpkg_configure)
   _vcpkg_bootstrap(${ARGN})
   _vcpkg_autodetect_target_triplet()
+  _vcpkg_autodetect_host_triplet()
 endfunction()
