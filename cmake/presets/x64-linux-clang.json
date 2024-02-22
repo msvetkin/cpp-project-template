@@ -13,14 +13,18 @@
         "linux",
         "clang"
       ],
-      "displayName": "x64 linux clang static libs"
+      "displayName": "x64 linux clang static libs",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-static"
+      }
     },
     {
       "name": "x64-linux-clang-dynamic",
       "inherits": "x64-linux-clang-static",
       "displayName": "x64 linux clang dynamic libs",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": true
+        "BUILD_SHARED_LIBS": true,
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-dynamic"
       }
     },
     {

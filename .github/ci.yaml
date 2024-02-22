@@ -12,7 +12,6 @@ jobs:
           { os: ubuntu-latest, preset: x64-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x86-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x64-linux-clang-dynamic },
-          { os: ubuntu-latest, preset: x86-linux-clang-dynamic },
           { os: macos-latest, preset: x64-darwin-gcc-dynamic },
           { os: macos-latest, preset: x64-darwin-clang-dynamic },
           { os: windows-latest, preset: x64-windows-msvc-dynamic },
