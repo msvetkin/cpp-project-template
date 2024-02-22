@@ -13,14 +13,18 @@
         "linux",
         "x86-clang"
       ],
-      "displayName": "linux clang static libs"
+      "displayName": "x86 linux clang static libs",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x86-linux-clang-static"
+      }
     },
     {
       "name": "x86-linux-clang-dynamic",
       "inherits": "x86-linux-clang-static",
-      "displayName": "linux clang dynamic libs",
+      "displayName": "x86 linux clang dynamic libs",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": true
+        "BUILD_SHARED_LIBS": true,
+        "VCPKG_TARGET_TRIPLET": "x86-linux-clang-dynamic"
       }
     },
     {
