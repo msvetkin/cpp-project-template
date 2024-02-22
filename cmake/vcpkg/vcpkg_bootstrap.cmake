@@ -1,6 +1,10 @@
 # SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
+# CMAKE_HOST_* variables are not available during first configure on windows.
+cmake_host_system_information(RESULT __vcpkg_bootstrap_host QUERY OS_NAME)
+cmake_host_system_information(RESULT __vcpkg_bootstrap_arch QUERY OS_PLATFORM)
+
 # stash all local changes
 function(_vcpkg_stash vcpkg_root)
   message(STATUS "vcpkg stash all local changes")
@@ -54,12 +58,12 @@ endfunction()
 function(_vcpkg_bootstrap vcpkg_root)
   message(STATUS "Bootstrap vckpg")
 
-  if(WIN32)
+  if("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(bootstrap_cmd "${vcpkg_root}/bootstrap-vcpkg.bat")
   else()
     set(bootstrap_cmd "${vcpkg_root}/bootstrap-vcpkg.sh")
-
   endif()
+
   execute_process(
     COMMAND ${bootstrap_cmd} -disableMetrics
     WORKING_DIRECTORY ${vcpkg_root}
@@ -123,9 +127,9 @@ endfunction()
 
 # find root
 function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
-  if (DEFINED ENV{VCPKG_INSTALLATION_ROOT})
+  if(DEFINED ENV{VCPKG_INSTALLATION_ROOT})
     set(root "$ENV{VCPKG_INSTALLATION_ROOT}")
-  elseif(WIN32)
+  elseif("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(root "$ENV{LOCALAPPDATA}/vcpkg/projects/${cache_dir_name}/cache")
   else()
     set(root "$ENV{HOME}/.cache/vcpkg/projects/${cache_dir_name}")
@@ -159,7 +163,7 @@ function(vcpkg_bootstrap)
     ""
   )
 
-  if (DEFINED arg_UNPARSED_ARGUMENTS)
+  if(DEFINED arg_UNPARSED_ARGUMENTS)
     message(FATAL_ERROR
       "internal error: ${CMAKE_CURRENT_FUNCTION} passed extra args:"
       "${arg_UNPARSED_ARGUMENTS}"
