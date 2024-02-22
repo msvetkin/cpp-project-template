@@ -49,8 +49,8 @@ function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
 endfunction()
 
 # boostrap
-function(_vcpkg_bootstrap vcpkg_root)
-  message(STATUS "Bootstrap vckpg")
+function(_vcpkg_tool_bootstrap vcpkg_root)
+  message(STATUS "Bootstrap vckpg tool")
 
   if("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(bootstrap_cmd "${vcpkg_root}/bootstrap-vcpkg.bat")
@@ -149,7 +149,7 @@ function(_vcpkg_set_cache_variables vcpkg_root)
 endfunction()
 
 # bootstrap
-function(vcpkg_bootstrap)
+function(_vcpkg_bootstrap)
   cmake_parse_arguments(
     PARSE_ARGV 0 "arg"
     ""
@@ -175,7 +175,7 @@ function(vcpkg_bootstrap)
   if(NOT EXISTS ${vcpkg_root})
     message(STATUS "Setup vcpkg")
     _vcpkg_clone(${vcpkg_root} ${arg_REPO} ${arg_REF})
-    _vcpkg_bootstrap(${vcpkg_root})
+    _vcpkg_tool_bootstrap(${vcpkg_root})
   else()
     message(STATUS "Found vcpkg in: ${vcpkg_root}")
     _vcpkg_upgrade(${vcpkg_root} ${arg_REPO} ${arg_REF})
@@ -186,10 +186,4 @@ function(vcpkg_bootstrap)
   endif()
 
   _vcpkg_set_cache_variables("${vcpkg_root}")
-endfunction()
-
-# bootstrap and configure vcpkg
-function(vcpkg_configure)
-  vcpkg_bootstrap(${ARGN})
-  _vcpkg_autodetect_target_triplet()
 endfunction()
