@@ -4,7 +4,7 @@
 include_guard(GLOBAL)
 
 # sets VCPKG_TARGET_TRIPLET out of VCPKG_PRESET_NAME
-function(vcpkg_autodetect_target_triplet)
+function(_vcpkg_autodetect_target_triplet)
   if (DEFINED CACHE{VCPKG_TARGET_TRIPLET})
     return()
   endif()

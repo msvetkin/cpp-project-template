@@ -120,7 +120,7 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
 
   _vcpkg_stash(${vcpkg_root})
   _vcpkg_checkout(${vcpkg_root} ${vcpkg_ref})
-  _vcpkg_bootstrap(${vcpkg_root})
+  _vcpkg_tool_bootstrap(${vcpkg_root})
 endfunction()
 
 # find root
@@ -139,7 +139,7 @@ function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
   )
 endfunction()
 
-# set vcpkg_root/executable/toolchain_file cache variables
+# set vcpkg_root/toolchain_file cache variables
 function(_vcpkg_set_cache_variables vcpkg_root)
   set(_VCPKG_ROOT
       "${vcpkg_root}"
@@ -190,4 +190,10 @@ function(vcpkg_bootstrap)
   endif()
 
   _vcpkg_set_cache_variables("${vcpkg_root}")
+endfunction()
+
+# bootstrap and configure vcpkg
+function(vcpkg_configure)
+  vcpkg_bootstrap(${ARGN})
+  _vcpkg_autodetect_target_triplet()
 endfunction()
