@@ -1,8 +1,6 @@
 # SPDX-FileCopyrightText: Copyright 2023 Mikhail Svetkin
 # SPDX-License-Identifier: MIT
 
-include_guard(GLOBAL)
-
 # sets VCPKG_TARGET_TRIPLET out of VCPKG_PRESET_NAME
 function(_vcpkg_autodetect_target_triplet)
   if (DEFINED CACHE{VCPKG_TARGET_TRIPLET})
@@ -13,7 +11,8 @@ function(_vcpkg_autodetect_target_triplet)
     message(FATAL_ERROR "Missing mandatory VCPKG_PRESET_NAME cache variable")
   endif()
 
-  if(APPLE)
+  # for some reason macOS is possible instead of Darwin
+  if("${__vcpkg_bootstrap_host}" MATCHES "Darwin|macOS")
     string(REPLACE "darwin" "osx" VCPKG_PRESET_NAME "${VCPKG_PRESET_NAME}")
   endif()
 
