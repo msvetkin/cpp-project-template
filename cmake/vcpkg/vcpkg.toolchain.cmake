@@ -13,8 +13,7 @@ endif()
 
 unset(IN_TRY_COMPILE)
 
-include(${CMAKE_CURRENT_LIST_DIR}/bootstrap/vcpkg_autodetect_target_triplet.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/bootstrap/vcpkg_bootstrap.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/bootstrap/vcpkg-config.cmake)
 
 vcpkg_configure(
   CACHE_DIR_NAME @cpp_pt_name@
