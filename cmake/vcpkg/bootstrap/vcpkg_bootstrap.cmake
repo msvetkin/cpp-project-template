@@ -36,9 +36,7 @@ function(_vcpkg_checkout vcpkg_root vcpkg_ref)
         "${GIT_EXECUTABLE} checkout ${vcpkg_ref} failed with ${result}"
     )
   endif()
-endfunction()
-
-# clone
+endfunction() # clone
 function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
   execute_process(
     COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root}
