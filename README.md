@@ -64,7 +64,7 @@ target_link_libraries(<TARGET> PUBLIC <PROJECT_NAME>::<MODULE_NAME>)
 
 This will require that your library is published and installed via vcpkg or found locally by setting the `CMAKE_PREFIX_PATH` environment variable in your other project during configure.
 
-If you wish to expose parts of your library as a WebAssembly module, you can add the `WASM_EXPORT("<export_name>")` macro to any function you wish to expose within your module, and compile using the `wasm32-wasi-clang` preset. This will generate a minimal WebAssembly binary exposing your exported functions. This binary conforms to the [WASI WebAssembly standard](https://wasi.dev/), so it can be utilized in any WASI-supporting runtime like [`wasmer.io`](https://wasmer.io/)
+If you wish to expose parts of your library as a WebAssembly module, you can add the `WASM_EXPORT("<export_name>")` macro to any function you wish to expose in `src/wasm/interface.cpp`, and compile using the `wasm32-wasi-clang` preset. This will generate a minimal WebAssembly binary exposing your exported functions at `build/<PRESET>/src/wasm/<Debug|Release|RelWithDebInfo>/lib<PROJECT_NAME>.wasm`. This binary conforms to the [WASI WebAssembly standard](https://wasi.dev/), so it can be utilized in any WASI-supporting runtime like [`wasmer.io`](https://wasmer.io/)
 
 ```sh
 wasmer run build/<PRESET>/src/cli/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_cli
