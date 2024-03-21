@@ -13,3 +13,5 @@ runs:
             clang-17 llvm-17 lld-17 lldb-17 libc++-17-dev \
             libc++abi-17-dev libclang-rt-17-dev
         for f in /usr/lib/llvm-*/bin/*; do sudo ln -sf "$f" /usr/bin; done
+        sudo mkdir -p /usr/lib/llvm-17/lib/clang/17/lib/wasi
+        sudo chmod 0777 /usr/lib/llvm-17/lib/clang/17/lib/wasi

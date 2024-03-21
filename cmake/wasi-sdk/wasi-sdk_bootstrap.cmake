@@ -112,7 +112,7 @@ function(wasi_sdk_bootstrap)
     RESULT wasi_sdk_runtime_copy_failed
   )
   if (wasi_sdk_runtime_copy_failed)
-    message(FATAL_ERROR "Moving wasi-sdk libclang runtime builtins to ${wasi_sdk_root}/lib/wasi failed. \n${wasi_sdk_runtime_copy_failed}\n")
+    message(FATAL_ERROR "Moving wasi-sdk libclang runtime builtins to ${clang_resource_dir}/lib/wasi failed. \n${wasi_sdk_runtime_copy_failed}\n")
   endif()
 
   set(${arg_WASI_SYSROOT_OUTPUT}
