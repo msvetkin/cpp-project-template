@@ -26,7 +26,7 @@
       "cacheVariables": {
         "BUILD_SHARED_LIBS": true,
         "CMAKE_CXX_FLAGS": "-stdlib=libc++",
-        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-static"
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-dynamic"
       }
     },
     {
