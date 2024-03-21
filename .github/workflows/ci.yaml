@@ -35,6 +35,15 @@ jobs:
     - uses: ./.github/actions/vcpkg-cache
 
     - name: CMake workflow
+      id: cmake-workflow
       shell: bash
       run: |
         cmake --workflow --preset ${{matrix.target.preset}}
+
+    - name: Upload vcpkg error logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs-${{matrix.target.preset}}
+        path: |
+          /usr/local/share/vcpkg/**/*.log
