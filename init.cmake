@@ -71,6 +71,9 @@ set(templates
     src/cmake/cpp-pt-install-targets.cmake
     src/cmake/set_cpp_pt_target_properties.cmake
     src/CMakeLists.txt
+    src/wasm/src/interface.cpp
+    src/wasm/include/interface.hpp
+    src/wasm/CMakeLists.txt
     tests/module-1
     tests/${cpp_pt_module}/header-1_test.cpp
     tests/${cpp_pt_module}/CMakeLists.txt

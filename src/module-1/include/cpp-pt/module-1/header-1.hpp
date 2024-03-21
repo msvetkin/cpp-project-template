@@ -7,8 +7,6 @@
 
 #include <string>
 
-WASM_EXPORT("version") char* version() noexcept;
-
 namespace @cpp_pt_name@::@cpp_pt_module@ {
 
 [[nodiscard]] @cpp_pt_module_export@ std::string version() noexcept;
