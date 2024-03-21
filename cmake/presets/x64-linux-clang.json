@@ -15,7 +15,8 @@
       ],
       "displayName": "x64 linux clang static libs",
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-static"
       }
     },
     {
@@ -24,7 +25,8 @@
       "displayName": "x64 linux clang dynamic libs",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": true,
-        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-static"
       }
     },
     {

@@ -32,9 +32,7 @@ function(_vcpkg_checkout vcpkg_root vcpkg_ref)
         "${GIT_EXECUTABLE} checkout ${vcpkg_ref} failed with ${result}"
     )
   endif()
-endfunction()
-
-# clone
+endfunction() # clone
 function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
   execute_process(
     COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root}
@@ -51,15 +49,15 @@ function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
 endfunction()
 
 # boostrap
-function(_vcpkg_bootstrap vcpkg_root)
-  message(STATUS "Bootstrap vckpg")
+function(_vcpkg_tool_bootstrap vcpkg_root)
+  message(STATUS "Bootstrap vckpg tool")
 
-  if(WIN32)
+  if("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(bootstrap_cmd "${vcpkg_root}/bootstrap-vcpkg.bat")
   else()
     set(bootstrap_cmd "${vcpkg_root}/bootstrap-vcpkg.sh")
-
   endif()
+
   execute_process(
     COMMAND ${bootstrap_cmd} -disableMetrics
     WORKING_DIRECTORY ${vcpkg_root}
@@ -118,14 +116,14 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
 
   _vcpkg_stash(${vcpkg_root})
   _vcpkg_checkout(${vcpkg_root} ${vcpkg_ref})
-  _vcpkg_bootstrap(${vcpkg_root})
+  _vcpkg_tool_bootstrap(${vcpkg_root})
 endfunction()
 
 # find root
 function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
-  if (DEFINED ENV{VCPKG_INSTALLATION_ROOT})
+  if(DEFINED ENV{VCPKG_INSTALLATION_ROOT})
     set(root "$ENV{VCPKG_INSTALLATION_ROOT}")
-  elseif(WIN32)
+  elseif("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(root "$ENV{LOCALAPPDATA}/vcpkg/projects/${cache_dir_name}/cache")
   else()
     set(root "$ENV{HOME}/.cache/vcpkg/projects/${cache_dir_name}")
@@ -137,7 +135,7 @@ function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
   )
 endfunction()
 
-# set vcpkg_root/executable/toolchain_file cache variables
+# set vcpkg_root/toolchain_file cache variables
 function(_vcpkg_set_cache_variables vcpkg_root)
   set(_VCPKG_ROOT
       "${vcpkg_root}"
@@ -151,7 +149,7 @@ function(_vcpkg_set_cache_variables vcpkg_root)
 endfunction()
 
 # bootstrap
-function(vcpkg_bootstrap)
+function(_vcpkg_bootstrap)
   cmake_parse_arguments(
     PARSE_ARGV 0 "arg"
     ""
@@ -159,7 +157,7 @@ function(vcpkg_bootstrap)
     ""
   )
 
-  if (DEFINED arg_UNPARSED_ARGUMENTS)
+  if(DEFINED arg_UNPARSED_ARGUMENTS)
     message(FATAL_ERROR
       "internal error: ${CMAKE_CURRENT_FUNCTION} passed extra args:"
       "${arg_UNPARSED_ARGUMENTS}"
@@ -177,7 +175,7 @@ function(vcpkg_bootstrap)
   if(NOT EXISTS ${vcpkg_root})
     message(STATUS "Setup vcpkg")
     _vcpkg_clone(${vcpkg_root} ${arg_REPO} ${arg_REF})
-    _vcpkg_bootstrap(${vcpkg_root})
+    _vcpkg_tool_bootstrap(${vcpkg_root})
   else()
     message(STATUS "Found vcpkg in: ${vcpkg_root}")
     _vcpkg_upgrade(${vcpkg_root} ${arg_REPO} ${arg_REF})
