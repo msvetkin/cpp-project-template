@@ -1,0 +1,16 @@
+name: "Ubuntu base dependencies"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install system dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build wget
+    - name: Install CMake
+      shell: bash
+      run: |
+        wget -nv -O ./cmake_install.sh https://github.com/Kitware/CMake/releases/download/v3.28.0-rc5/cmake-3.28.0-rc5-linux-x86_64.sh
+        sudo bash ./cmake_install.sh --skip-license --prefix=/usr --exclude-subdir
+        rm -f ./cmake_install.sh

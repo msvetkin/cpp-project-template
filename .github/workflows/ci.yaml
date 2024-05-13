@@ -9,6 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [
+          { os: ubuntu-22.04, preset: wasm32-wasi-clang-static },
           { os: ubuntu-latest, preset: x64-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x86-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x64-linux-clang-dynamic },
@@ -34,6 +35,15 @@ jobs:
     - uses: ./.github/actions/vcpkg-cache
 
     - name: CMake workflow
+      id: cmake-workflow
       shell: bash
       run: |
         cmake --workflow --preset ${{matrix.target.preset}}
+
+    - name: Upload vcpkg error logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs-${{matrix.target.preset}}
+        path: |
+          /usr/local/share/vcpkg/**/*.log

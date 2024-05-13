@@ -4,8 +4,8 @@
   "version-string": "0.0.1",
   "dependencies": [
     "fmt",
+    { "name": "catch2", "platform": "!wasm32" },
     "range-v3",
-    "ms-gsl",
-    "catch2"
+    "ms-gsl"
   ]
 }
