@@ -17,3 +17,7 @@ include(add_@cpp_pt_cmake@_executable)
 
 add_subdirectory(@cpp_pt_module@)
 add_subdirectory(cli)
+
+if (WASI) 
+  add_subdirectory(wasm)
+endif()

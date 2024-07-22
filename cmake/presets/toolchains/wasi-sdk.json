@@ -1,0 +1,13 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "wasi-sdk",
+      "hidden": true,
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/wasi-sdk.toolchain.cmake",
+        "CMAKE_CROSSCOMPILING_EMULATOR": "wasmtime"
+      }
+    }
+  ]
+}
