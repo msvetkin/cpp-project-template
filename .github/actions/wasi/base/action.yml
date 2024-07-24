@@ -1,0 +1,16 @@
+name: "Ubuntu base dependencies"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install system dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build
+
+    - name: Install wasmtime CLI
+      shell: bash
+      run: |
+        curl https://wasmtime.dev/install.sh -sSf | bash
+        sudo cp ~/.wasmtime/bin/wasmtime /usr/bin/wasmtime
