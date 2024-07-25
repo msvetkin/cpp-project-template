@@ -17,8 +17,8 @@ include(${CMAKE_CURRENT_LIST_DIR}/bootstrap/vcpkg-config.cmake)
 
 vcpkg_configure(
   CACHE_DIR_NAME @cpp_pt_name@
-  REPO https://github.com/microsoft/vcpkg.git
-  REF 9edb1b8e590cc086563301d735cae4b6e732d2d2 # release 2023.08.09
+  REPO https://github.com/rioam2/vcpkg-wasm32-wasi
+  REF 983e077b814c4c0e56336e1d32407c2b2c13a90b
 )
 
 include($CACHE{_VCPKG_TOOLCHAIN_FILE})

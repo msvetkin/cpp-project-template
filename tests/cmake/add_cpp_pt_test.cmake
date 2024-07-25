@@ -25,5 +25,9 @@ function(add_@cpp_pt_cmake@_test test_name)
     ${test_target} PRIVATE @cpp_pt_name@::${module_name} Catch2::Catch2WithMain
   )
 
+  if (WASI)
+    target_link_options(${test_target} PRIVATE -nostartfiles -Wl,--no-entry)
+  endif()
+
   catch_discover_tests(${test_target} TEST_PREFIX "${test_target}:" ${ARGN})
 endfunction()

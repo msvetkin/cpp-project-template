@@ -65,6 +65,8 @@ set(templates
     src/${cpp_pt_module}/src/header-1.cpp
     src/cli/CMakeLists.txt
     src/cli/src/main.cpp
+    src/wasm/CMakeLists.txt
+    src/wasm/src/interface.cpp
     src/cmake/add_cpp_pt_executable.cmake
     src/cmake/add_cpp_pt_module.cmake
     src/cmake/cpp-pt-config.cmake

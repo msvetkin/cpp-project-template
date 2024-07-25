@@ -12,11 +12,11 @@ jobs:
           { os: ubuntu-latest, preset: x64-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x86-linux-gcc-dynamic },
           { os: ubuntu-latest, preset: x64-linux-clang-dynamic },
-          { os: ubuntu-latest, preset: x86-linux-clang-dynamic },
           { os: macos-latest, preset: x64-darwin-gcc-dynamic },
           { os: macos-latest, preset: x64-darwin-clang-dynamic },
           { os: windows-latest, preset: x64-windows-msvc-dynamic },
           { os: windows-latest, preset: x64-windows-clang-dynamic },
+          { os: ubuntu-latest, preset: wasm32-wasi-clang-static },
         ]
 
     steps:
@@ -37,3 +37,11 @@ jobs:
       shell: bash
       run: |
         cmake --workflow --preset ${{matrix.target.preset}}
+
+    - name: Upload vcpkg error logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs-${{matrix.target.preset}}
+        path: |
+          /usr/local/share/vcpkg/**/*.log

@@ -8,6 +8,7 @@
   "include": [
     "cmake/presets/arm64-darwin-gcc.json",
     "cmake/presets/arm64-darwin-clang.json",
+    "cmake/presets/wasm32-wasi-clang.json",
     "cmake/presets/x64-darwin-gcc.json",
     "cmake/presets/x64-darwin-clang.json",
     "cmake/presets/x64-linux-gcc.json",
