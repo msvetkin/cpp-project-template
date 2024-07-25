@@ -63,3 +63,17 @@ target_link_libraries(<TARGET> PUBLIC <PROJECT_NAME>::<MODULE_NAME>)
 ```
 
 This will require that your library is published and installed via vcpkg or found locally by setting the `CMAKE_PREFIX_PATH` environment variable in your other project during configure.
+
+If you wish to expose parts of your library as a WebAssembly module, you can add the `extern "C" __attribute__((export_name("<my_function_name>")))` annotation to any function you wish to expose in `src/wasm/interface.cpp`, and compile using the `wasm32-wasi-clang` preset. This will generate a minimal WebAssembly binary exposing your exported functions at `build/<PRESET>/src/wasm/<Debug|Release|RelWithDebInfo>/lib<PROJECT_NAME>.wasm`. This binary conforms to the [WASI WebAssembly standard](https://wasi.dev/), so it can be utilized in any WASI-supporting runtime like [`wasmer.io`](https://wasmer.io/) or [wasmtime](https://wasmtime.dev/).
+
+A WebAssembly version of your CLI will also be available:
+
+```sh
+wasmtime run build/<PRESET>/src/cli/<Debug|Release|RelWithDebInfo>/<PROJECT_NAME>_cli
+
+# Prints:
+# <PROJECT_NAME> version: 0.0.1
+```
+
+> [!NOTE] 
+> Exposed WebAssembly functions currently only accept parameters and return values of numerical type. This is how core WebAssembly files work, and without additional glue-code or binding generators like [wit-bindgen](https://github.com/bytecodealliance/wit-bindgen), complex data-types cannot be sent over the runtime's ABI boundary. Complex data must be transferred via pointer and serialized bytes in exported/shared memory.
